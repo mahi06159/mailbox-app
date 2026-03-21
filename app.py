@@ -130,9 +130,11 @@ def logout():
     # Redirect user to login form
     return redirect("/")
 
-
+if not os.path.exists("project.db"):
+    open("project.db", "w").close()
 @app.route("/email", methods=["GET", "POST"])
 @login_required
+
 def email():
     """View email details"""
     if request.method == "POST":
@@ -185,3 +187,5 @@ def reply():
             "SELECT * FROM emails WHERE id = ?", emailId)
         emailDetail = emailDetailDB[0]
         return render_template("reply.html", emailDetail=emailDetail)
+
+
