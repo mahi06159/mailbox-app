@@ -28,6 +28,7 @@ if not os.path.exists("project.db"):
 # Configure database
 db = SQL("sqlite:///project.db")
 # Create tables if not exist
+# ✅ Auto create tables (IMPORTANT for Render)
 db.execute("""
 CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
