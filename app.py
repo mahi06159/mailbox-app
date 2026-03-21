@@ -32,9 +32,10 @@ def after_request(response):
 
 
 @app.route("/")
-@login_required
 def index():
-    """Show all the emails received"""
+    if not session.get("user_id"):
+        return redirect("/login")
+
     userId = session["user_id"]
     usernameDB = db.execute("SELECT username FROM users WHERE id= ?", userId)
     username = usernameDB[0]["username"]
